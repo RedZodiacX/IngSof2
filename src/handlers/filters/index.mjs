@@ -1,30 +1,30 @@
-import { Router } from "express";
-import applyFiltersHandler from "./applyFiltersHandler.mjs";
-import multer from "multer";
+import { Router } from 'express';
+import multer from 'multer';
+import applyFiltersHandler from './applyFiltersHandler.mjs';
 
 const router = Router();
 
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
-router.get("/", (req, res) => {
-    res.send("ok imagen get");
+router.get('/', (req, res) => {
+  res.send('ok imagen get');
 });
 
-router.post("/", upload.array("files"), (req, res) => {
-    const files = req.files;
-    const filters = req.body.filters;
+router.post('/', upload.array('files'), (req, res) => {
+  const { files } = req;
+  const { filters } = req.body;
 
-    console.log("Filters:", filters);
+  console.log('Filters:', filters);
 
-    files.forEach((file, index) => {
-        console.log(`File ${index + 1}:`);
-        console.log("Fieldname:", file.fieldname);
-        console.log("Originalname:", file.originalname);
-        console.log("Mimetype:", file.mimetype);
-    });
+  files.forEach((file, index) => {
+    console.log(`File ${index + 1}:`);
+    console.log('Fieldname:', file.fieldname);
+    console.log('Originalname:', file.originalname);
+    console.log('Mimetype:', file.mimetype);
+  });
 
-    res.send("Archivos recibidos y procesados correctamente.");
+  res.send('Archivos recibidos y procesados correctamente.');
 });
 
 export const test = () => {};
