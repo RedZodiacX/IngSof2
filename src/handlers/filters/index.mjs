@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import multer from 'multer';
+// eslint-disable-next-line
 import applyFiltersHandler from './applyFiltersHandler.mjs';
 
 const router = Router();

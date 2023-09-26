@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TRYPE_OF_FILTERS } from '../commons/constans.mjs';
+import { TYPE_OF_FILTERS } from '../commons/constans.mjs';
 
 const processSchema = new Schema(
   {
@@ -7,7 +7,7 @@ const processSchema = new Schema(
       type: [
         {
           type: String,
-          enum: TRYPE_OF_FILTERS,
+          enum: TYPE_OF_FILTERS,
           required: true,
         },
       ],
@@ -18,6 +18,6 @@ const processSchema = new Schema(
   },
 );
 
-const processModel = model('process', processSchema);
+const processModel = model('Process', processSchema);
 
 export default processModel;
