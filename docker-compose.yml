@@ -6,9 +6,12 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 3001:5001
+      - 5001:5001
     networks:
       - processor-net
+    depends_on:
+      minio:
+        condition: services_healthy
 
   minio:
     container_name: minio
@@ -17,12 +20,19 @@ services:
       - 9000:9000
       - 9001:9001
     environment:
-      MINIO_ACCESS_KEY: root
-      MINIO_SECRET_KEY: root
+      MINIO_ROOT_USER = root
+      MINIO_ROOT_PASSWORD = root1234
     volumes:
       - minio_data:/data
     networks:
       - processor-net
+    command: server --console-address ":9001" /data
+    healthcheck:
+      test: ["CMD", "crul", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
 networks:
   processor-net:

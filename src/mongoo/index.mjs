@@ -1,8 +1,13 @@
 import mongoose from 'mongoose';
+import { MONGO_URI } from '../commons/env.mjs';
 
 export const starConnection = async () => {
-  const url = encodeURI('mongodb+srv://andres:Contraseña1234@bdprueba.552k2pn.mongodb.net/?retryWrites=true&w=majority&ssl=true');
+  const url = encodeURI(MONGO_URI);
   await mongoose.connect(url);
+};
+
+export const closeConnection = async () => {
+  await mongoose.connection.close();
 };
 
 export default starConnection;
