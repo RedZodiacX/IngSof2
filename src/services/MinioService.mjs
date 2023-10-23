@@ -2,6 +2,7 @@ import { S3Client, PutObjectAclCommand } from '@aws-sdk/client-s3';
 import { v4 } from 'uuid';
 import Boom from '@hapi/boom';
 import { MINIO_ACCESS_KEY, MINIO_HOST, MINIO_SECRET_KEY } from '../commons/env.mjs';
+import { BUCKET_NAME } from '../commons/constans.mjs';
 
 class MinioService {
   conn = null;
@@ -20,7 +21,7 @@ class MinioService {
     }
   }
 
-  async saveImage(Image) {
+  async saveImage(image) {
     try {
       if (!image) {
         throw Boom.badRequest('Image is required');
@@ -35,7 +36,7 @@ class MinioService {
       const { originalname, buffer } = image;
       const originalNameParts = originalname.split('.');
 
-      if (originalNameParts, length !== 2) {
+      if (originalNameParts.length !== 2) {
         throw Boom.badRequest('Invalid image name');
       }
 

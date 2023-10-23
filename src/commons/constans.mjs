@@ -4,4 +4,4 @@ export const NEGATIVE_FILTER = 'negative';
 
 export const TYPE_OF_FILTERS = [GREYSCALE_FILTER, BLUR_FILTER, NEGATIVE_FILTER];
 
-export const BUCKET_NAME = 'name';
+export const BUCKET_NAME = 'images';

@@ -11,7 +11,7 @@ services:
       - processor-net
     depends_on:
       minio:
-        condition: services_healthy
+        condition: service_started
 
   minio:
     container_name: minio
@@ -20,13 +20,13 @@ services:
       - 9000:9000
       - 9001:9001
     environment:
-      MINIO_ROOT_USER = root
-      MINIO_ROOT_PASSWORD = root1234
+      MINIO_ROOT_USER : root
+      MINIO_ROOT_PASSWORD : root1234
     volumes:
       - minio_data:/data
     networks:
       - processor-net
-    command: server --console-address ":9001" /data
+    command: server --console-address ":9001" /data "&&" sh -c "mkdir -p /data/images"
     healthcheck:
       test: ["CMD", "crul", "-f", "http://localhost:9000/minio/health/live"]
       interval: 10s

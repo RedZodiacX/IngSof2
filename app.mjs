@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import Boom from '@hapi/boom';
 import FilterRouter from './src/handlers/filters/index.mjs';
 import buildContainer from './src/container/buildContainer.mjs';
+import { starConnection } from './src/mongoo/index.mjs';
+import { PORT } from './src/commons/env.mjs';
 
 const app = Express();
 app.use(bodyParser.json());
@@ -32,4 +34,4 @@ const starServer = async () => {
   });
 };
 
-starServer();
+export default starServer();
