@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(buildContainer);
 
 app.get('/', (req, res) => {
-  res.send('ok');
+  res.send('ok'); 
 });
 
 app.use('/images', FilterRouter);
