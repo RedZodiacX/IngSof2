@@ -26,10 +26,18 @@ class ProcessService {
     }
 
     const { images, filters } = payload;
-    const process = await this.processRepository.save({ filters }); // payload
-    const imagesPromises = images.map((image) => this.minioService.saveImage(image));
-    const imagesNames = await Promise.all(imagesPromises);
-    console.log(imagesNames);
+    const process = await this.processRepository.save({ filters });
+
+    const imagesInfoPromises = images.map(async (image) => {
+      const fileName = await this.minioService.saveImage(image);
+      const signedUrl = await this.minioService.getPresignedUrl(fileName);
+
+      return { fileName, signedUrl };
+    });
+
+    const imagesInfo = await Promise.all(imagesInfoPromises);
+    console.log(imagesInfo);
+
     return process;
   }
 }

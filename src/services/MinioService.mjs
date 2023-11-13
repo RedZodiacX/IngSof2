@@ -1,8 +1,11 @@
 import { S3Client, PutObjectAclCommand } from '@aws-sdk/client-s3';
+import AWS from '@aws-sdk/s3-request-presigner';
 import { v4 } from 'uuid';
 import Boom from '@hapi/boom';
 import { MINIO_ACCESS_KEY, MINIO_HOST, MINIO_SECRET_KEY } from '../commons/env.mjs';
 import { BUCKET_NAME } from '../commons/constans.mjs';
+
+const { createPresignedRequest } = AWS;
 
 class MinioService {
   conn = null;
@@ -53,5 +56,21 @@ class MinioService {
       throw Boom.isBoom(error) ? error : Boom.internal('Error saving image', error);
     }
   }
+
+  async getPresignedUrl(fileName) {
+    try {
+      const s3Client = this.conn;
+
+      const getObjectCommand = { Bucket: BUCKET_NAME, Key: fileName };
+
+      const signedUrl = await
+      createPresignedRequest(s3Client, getObjectCommand, { expiresIn: 86400 });
+
+      return signedUrl;
+    } catch (error) {
+      throw Boom.isBoom(error) ? error : Boom.internal('Error generating signed URL', error);
+    }
+  }
 }
+
 export default MinioService;
