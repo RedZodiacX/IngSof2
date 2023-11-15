@@ -28,6 +28,7 @@ services:
     networks:
       - processor-net
 
+
     command: server --console-address ":9001" /data "&&" sh -c "mkdir -p /data/images"
     healthcheck:
       test: ["CMD", "crul", "-f", "http://localhost:9000/minio/health/live"]

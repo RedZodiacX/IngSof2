@@ -29,7 +29,7 @@ module.exports = {
       'ignorePackages',
       {
         js: 'never',
-        mjs: 'always',
+        mjs: 'always' ,
       },
     ],
   },
