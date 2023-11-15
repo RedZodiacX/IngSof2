@@ -5,13 +5,19 @@ import FilterRouter from './src/handlers/filters/index.mjs';
 import buildContainer from './src/container/buildContainer.mjs';
 import { starConnection } from './src/mongoo/index.mjs';
 import { PORT } from './src/commons/env.mjs';
+import ProcessModel from './src/models/process.mjs';
+
+
 
 const app = Express();
 app.use(bodyParser.json());
 app.use(buildContainer);
 
+app.use(Express.static('public'));
+
+
 app.get('/', (req, res) => {
-  res.send('ok');
+  res.send('ok') ; 
 });
 
 app.use('/images', FilterRouter);

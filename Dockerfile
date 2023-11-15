@@ -7,6 +7,7 @@ COPY package.json .
 COPY package-lock.json .
 COPY /src ./src/
 
+
 ENV PORT 5001
 ENV MONGO_URI mongodb://andres:Contraseña1234@bdprueba.552k2pn.mongodb.net/?retryWrites=true&w=majority&ssl=true
 ENV MINIO_HOST http://minio:9000
