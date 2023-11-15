@@ -40,4 +40,4 @@ const starServer = async () => {
   });
 };
 
-export default starServer();
+export default starServer;

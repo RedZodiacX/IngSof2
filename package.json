@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "-": "^0.0.1",
-    "@aws-sdk/client-s3": "^3.429.0",
+    "@aws-sdk/client-s3": "^3.420.0",
+    "@aws-sdk/s3-request-presigner": "^3.449.0",
     "@hapi/boom": "^10.0.1",
     "body-parser": "^1.20.2",
     "cross-env": "^7.0.3",
